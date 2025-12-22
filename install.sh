@@ -8,11 +8,11 @@ fi
 
 # 获取脚本参数
 TYPE=$1
-shift  # 移除第一个参数（server 或 gostc），剩下的参数作为额外参数
+shift  # 移除第一个参数，剩下的作为额外参数
 
 # GitHub仓库信息
-REPO_OWNER="MAXXS2814"       # 你的仓库用户名
-REPO_NAME="gostc-l"          # 你的仓库名称
+REPO_OWNER="MAXXS2814"
+REPO_NAME="gostc-l"
 
 # 目标目录
 if [ "$TYPE" = "server" ]; then
@@ -54,10 +54,11 @@ LATEST_RELEASE=$(curl -s "https://api.github.com/repos/$REPO_OWNER/$REPO_NAME/re
 # 提取下载 URL
 ASSETS=$(echo "$LATEST_RELEASE" | grep -oP '"browser_download_url": "\K.*?(?=")')
 
-# 匹配带版本号的文件，例如 *_v1.tar.gz
+# 匹配文件：允许带版本号或不带版本号
 MATCHED_FILE=""
 for ASSET in $ASSETS; do
-    if [[ "$ASSET" == *"${TYPE}_${OS}_${ARCH}"* ]]; then
+    BASENAME=$(basename "$ASSET")
+    if [[ "$BASENAME" == ${TYPE}_${OS}_${ARCH}* ]]; then
         MATCHED_FILE="$ASSET"
         break
     fi
@@ -79,14 +80,22 @@ if [ -n "$MATCHED_FILE" ]; then
         exit 1
     fi
 
-    # 修改权限
-    if [ -f "$TARGET_DIR/$BINARY_NAME" ]; then
+    # 找到二进制文件并修改权限
+    if [[ -f "$TARGET_DIR/$BINARY_NAME" ]]; then
         sudo chown root:root "$TARGET_DIR/$BINARY_NAME"
         sudo chmod +x "$TARGET_DIR/$BINARY_NAME"
         echo "$BINARY_NAME installed successfully in $TARGET_DIR"
     else
-        echo "Binary $BINARY_NAME not found in $TARGET_DIR"
-        exit 1
+        # 尝试匹配带版本号的二进制
+        BIN_FILE=$(find "$TARGET_DIR" -maxdepth 1 -type f -name "${BINARY_NAME}*")
+        if [ -n "$BIN_FILE" ]; then
+            sudo chown root:root "$BIN_FILE"
+            sudo chmod +x "$BIN_FILE"
+            echo "$BINARY_NAME installed successfully in $TARGET_DIR as $(basename $BIN_FILE)"
+        else
+            echo "Binary $BINARY_NAME not found in $TARGET_DIR"
+            exit 1
+        fi
     fi
 
     # 如果是 server 类型，运行安装命令
