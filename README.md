@@ -51,7 +51,7 @@ curl -sSL https://raw.githubusercontent.com/SianHH/gostc-open/main/install.sh | 
 
 国内网络环境
 ```shell
-curl -sSL https://alist.sian.one/direct/gostc/gostc-open/install.sh | bash -s -- gostc
+curl -sSL https://raw.githubusercontent.com/MAXXS2814/gostc-l/main/install.sh | bash -s -- gostc
 ```
 
 文件目录：**/usr/local/bin/gostc**
