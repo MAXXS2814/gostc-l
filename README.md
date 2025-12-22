@@ -9,12 +9,12 @@
 
 国外网络环境
 ```shell
-curl -sSL https://raw.githubusercontent.com/SianHH/gostc-open/main/install.sh | bash -s -- server
+curl -sSL https://raw.githubusercontent.com/MAXXS2814/gostc-l/main/install.sh | bash -s -- server
 ```
 
 国内网络环境
 ```shell
-curl -sSL https://alist.sian.one/direct/gostc/gostc-open/install.sh | bash -s -- server
+curl -sSL https://--/install.sh | bash -s -- server
 ```
 
 install后，需要systemctl start gostc-admin启动服务
