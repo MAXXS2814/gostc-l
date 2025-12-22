@@ -14,7 +14,7 @@ curl -sSL https://raw.githubusercontent.com/MAXXS2814/gostc-l/main/install.sh | 
 
 国内网络环境
 ```shell
-curl -sSL https://--/install.sh | bash -s -- server
+curl -sSL https://www.lfkj88.top:5002/gotsc-l/install.sh | bash -s -- server
 ```
 
 install后，需要systemctl start gostc-admin启动服务
