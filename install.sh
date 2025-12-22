@@ -11,8 +11,8 @@ TYPE=$1
 shift  # 移除第一个参数（server 或 gostc），剩下的参数作为额外参数
 
 # GitHub仓库信息
-REPO_OWNER="SianHH"  # 替换为仓库所有者
-REPO_NAME="gostc-open"    # 替换为仓库名称
+REPO_OWNER="MAXXS2814"  # 替换为仓库所有者
+REPO_NAME="gostc-l"    # 替换为仓库名称
 
 # 目标目录
 if [ "$TYPE" = "server" ]; then
