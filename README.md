@@ -9,7 +9,7 @@
 
 国外网络环境
 ```shell
-curl -sSL https://raw.githubusercontent.com/MAXXS2814/gostc-l/refs/heads/main/install.sh | bash -s -- server
+curl -sSL https://raw.githubusercontent.com/MAXXS2814/gostc-l/main/install.sh | bash -s -- server
 ```
 
 国内网络环境
